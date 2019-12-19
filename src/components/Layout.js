@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
@@ -6,6 +6,15 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Divider from "@material-ui/core/Divider";
 import MenuIcon from "@material-ui/icons/Menu";
 import Button from "@material-ui/core/Button";
+import Chip from '@material-ui/core/Chip';
+import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
+
+import { DataContext } from '../contexts/DataContext';
+
+import AddToLike from './AddToLike';
+import SearchInput from './SearchInput';
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -15,6 +24,7 @@ const useStyles = makeStyles(theme => ({
   menuButton: {
     marginRight: theme.spacing(1)
   },
+
   menu: {
     display: "flex",
     justifyContent: "space-between",
@@ -38,9 +48,25 @@ const useStyles = makeStyles(theme => ({
   },
   content: {
     padding: 15
-  }
+  },
+
+  sort: {
+   
+    padding: theme.spacing(1),
+  },
+  chip: {
+    margin: theme.spacing(0.5),
+  },
+ 
+
 }));
+
+const handleDelete = (data) => {
+    console.log(data);
+}
 export default function TemporaryDrawer() {
+
+  const { meals } = useContext(DataContext);
   const classes = useStyles();
   const [state, setState] = React.useState({
     left: false
@@ -61,13 +87,58 @@ export default function TemporaryDrawer() {
       className={classes.list}
       role="presentation"
       onClick={toggleDrawer(side, false)}
-      onKeyDown={toggleDrawer(side, false)}
-    >
-      Category
+      onKeyDown={toggleDrawer(side, false)}>
+
+
+    <Box className={classes.sort}>
+    
+    <Typography variant="h5" className={classes.heading}>
+    Category
+  </Typography>
+    {meals.map(meal => {
+      return (
+        <Chip
+          key={meal.idMeal} 
+          label={meal.strCategory}
+          className={classes.chip}
+        />
+      );
+    })}
+    </Box>
       <Divider />
+      <Box className={classes.sort}>
+    
+      <Typography variant="h5" className={classes.heading}>
       Area
+    </Typography>
+      {meals.map(meal => {
+        
+        return (
+          <Chip
+            key={meal.idMeal} 
+            label={meal.strArea}
+            className={classes.chip}
+          />
+        );
+      })}
+      </Box>
       <Divider />
+      <Box className={classes.sort}>
+    
+      <Typography variant="h5" className={classes.heading}>
       Tags
+    </Typography>
+      {meals.map(meal => {
+        return (
+          <Chip
+            key={meal.idMeal} 
+            label={meal.strTags ? meal.strTags : 'No tags'}
+            className={classes.chip}
+            onDelete={() => handleDelete(meal)}
+          />
+        );
+      })}
+      </Box>
     </div>
   );
   return (
@@ -78,6 +149,8 @@ export default function TemporaryDrawer() {
             {" "}
             <MenuIcon />
           </Button>
+          <SearchInput />
+          <AddToLike />
         </Toolbar>
       </AppBar>
       <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
