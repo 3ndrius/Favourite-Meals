@@ -41,7 +41,9 @@ const useStyles = makeStyles(theme => ({
 export default function LikedMeals() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const { liked } = useContext(DataContext);
+
+  const { liked, showSingleMeal, singleMeal } = useContext(DataContext);
+  console.log(singleMeal)
   console.log("Liked", liked)
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
@@ -85,7 +87,7 @@ export default function LikedMeals() {
           {liked.map((item, key)=> {
             return(
               <Card className={classes.card} key={key}>
-              <CardActionArea className={classes.set} onClick={() => {console.log(item[0])}}>
+              <CardActionArea className={classes.set} onClick={() => showSingleMeal(item[0])}>
                 <CardMedia 
                   className={classes.media}
                   image={item[1]}

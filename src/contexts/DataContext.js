@@ -8,7 +8,8 @@ class DataContextProvider extends Component {
   state = {
     meals: null,
     liked: JSON.parse(localStorage.getItem('Liked')) || [],
-    value: ''
+    value: '',
+    singleMeal: null
   };
   componentDidMount = async () => {
     console.log("Provider did mount ");
@@ -71,11 +72,25 @@ class DataContextProvider extends Component {
    }
   }
 
+  showSingleMeal = async (meal) => {
+    try{
+      let response = await fetch(`${API_URL}search.php?s=${meal}`);
+      let data = await response.json();
+      this.setState({ singleMeal: data})
+     } catch(err) {
+       console.log(err);
+     }
+    // this.setState({
+    //   singleMeal: this.state.meals.find(item => item.strMeal === meal)
+    // })
+    console.log(meal)
+  }
+
 
 
   render() {
     return (
-      <DataContext.Provider value={{ ...this.state , handleDelete: this.handleDelete, addToLike: this.addToLike, liked: this.state.liked, handleChangeInput: this.handleChangeInput}}>
+      <DataContext.Provider value={{ ...this.state , handleDelete: this.handleDelete, addToLike: this.addToLike, liked: this.state.liked, handleChangeInput: this.handleChangeInput, showSingleMeal: this.showSingleMeal}}>
         {this.props.children}
       </DataContext.Provider>
     );

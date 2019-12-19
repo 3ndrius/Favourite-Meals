@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
     padding: 16
   },
   list: {
-    width: 250
+    width: 290
   },
   fullList: {
     width: "auto"
