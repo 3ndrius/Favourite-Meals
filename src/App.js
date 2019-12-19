@@ -1,13 +1,12 @@
 import React from 'react';
 import DataContextProvider from './contexts/DataContext';
-import MealsList from './components/MealsList';
-import CategoryList from './components/CategoryList';
+import Layout from './components/Layout';
+
 function App() {
   return (
     <div className="App">
       <DataContextProvider>
-        <MealsList />
-        <CategoryList />
+        <Layout />
       </DataContextProvider>
     </div>
   );
