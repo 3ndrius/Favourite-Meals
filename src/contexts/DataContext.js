@@ -6,7 +6,8 @@ const API_URL = "https://www.themealdb.com/api/json/v1/1/";
 
 class DataContextProvider extends Component {
   state = {
-    meals: []
+    meals: null,
+    liked: JSON.parse(localStorage.getItem('Liked')) || []
   };
   componentDidMount = async () => {
     console.log("Provider did mount ");
@@ -41,11 +42,21 @@ class DataContextProvider extends Component {
     }
   }
 
+  savedToLocalStorage = (item) => {
+    localStorage.setItem("Liked", JSON.stringify(item))
+  }
+
+  addToLike = (title, img) => {
+    let saveMeal = [title, img];
+    let save = [...this.state.liked, saveMeal];
+    this.setState({liked: save}, 
+      () => this.savedToLocalStorage(this.state.liked))
+  }
 
 
   render() {
     return (
-      <DataContext.Provider value={{ ...this.state , handleDelete: this.handleDelete}}>
+      <DataContext.Provider value={{ ...this.state , handleDelete: this.handleDelete, addToLike: this.addToLike, liked: this.state.liked}}>
         {this.props.children}
       </DataContext.Provider>
     );

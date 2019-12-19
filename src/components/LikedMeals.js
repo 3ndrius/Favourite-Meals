@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Popover from "@material-ui/core/Popover";
 import Typography from "@material-ui/core/Typography";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import Paper from "@material-ui/core/Paper";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
+import { DataContext } from '../contexts/DataContext';
+import Box from "@material-ui/core/Box";
+
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+
 const useStyles = makeStyles(theme => ({
   content: {
     padding: 15
@@ -14,13 +21,28 @@ const useStyles = makeStyles(theme => ({
     borderRadius: 2,
     background: "transparent",
     zIndex: 6
+  },
+  card:{
+  
+  },
+  media: {
+    height:40,
+    width:40
+  },
+  set:{
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding:12,
+    alignItems: 'center'
   }
 }));
 
-export default function SimplePopover() {
+export default function LikedMeals() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-
+  const { liked } = useContext(DataContext);
+  console.log("Liked", liked)
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
   };
@@ -59,20 +81,26 @@ export default function SimplePopover() {
           horizontal: "center"
         }}
       >
-        <Paper className={classes.content}>
-          <Typography className={classes.typography}>
-            The content of the Popover.
-          </Typography>
-          <Typography className={classes.typography}>
-            The content of the Popover.
-          </Typography>
-          <Typography className={classes.typography}>
-            The content of the Popover.
-          </Typography>
-          <Typography className={classes.typography}>
-            The content of the Popover.
-          </Typography>
-        </Paper>
+       <Box>
+          {liked.map((item, key)=> {
+            return(
+              <Card className={classes.card} key={key}>
+              <CardActionArea className={classes.set} onClick={() => {console.log(item[0])}}>
+                <CardMedia 
+                  className={classes.media}
+                  image={item[1]}
+                  title={item[0]}
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h6" component="h6">
+                    {item[0]}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+            )
+          })}
+       </Box>
       </Popover>
     </div>
   );

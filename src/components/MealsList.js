@@ -1,5 +1,5 @@
 // import { DataContext } from '../contexts/DataContext';
-import React from "react";
+import React, {useContext} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -9,7 +9,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-
+import { DataContext } from '../contexts/DataContext';
 const useStyles = makeStyles({
   card: {
     maxWidth: 345,
@@ -26,9 +26,10 @@ const useStyles = makeStyles({
   }
 });
 
-export default function MealsList(props) {
+export default function MealsList() {
   const classes = useStyles();
-    console.log(props.data)
+  const { meals,  addToLike } = useContext(DataContext);
+    console.log(meals)
   return (
     <Grid
       container
@@ -38,8 +39,8 @@ export default function MealsList(props) {
       justify="center"
       item={true}
     >
-      {props.data &&
-         props.data.map(item => {
+      {meals ?
+         meals.map(item => {
             return (
               <Card className={classes.card} key={item.idMeal}>
                 <CardActionArea>
@@ -55,7 +56,7 @@ export default function MealsList(props) {
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
-                  <Button size="small" color="primary">
+                  <Button size="small" color="primary" onClick={() => addToLike(item.strMeal, item.strMealThumb)}>
                     Like
                   </Button>
                   <Button size="small" color="primary">
@@ -64,7 +65,7 @@ export default function MealsList(props) {
                 </CardActions>
               </Card>
             );
-          })
+          }) : "No results"
        }
     </Grid>
   );

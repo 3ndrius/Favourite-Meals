@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import MealsList from './MealsList';
 import { DataContext } from '../contexts/DataContext';
 
-import AddToLike from './AddToLike';
+import LikedMeals from './LikedMeals';
 import SearchInput from './SearchInput';
 
 
@@ -64,7 +64,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function TemporaryDrawer() {
 
-  const { meals, handleDelete } = useContext(DataContext);
+  const { meals, handleDelete, addToLike } = useContext(DataContext);
   const classes = useStyles();
   const [state, setState] = React.useState({
     left: false
@@ -93,7 +93,7 @@ export default function TemporaryDrawer() {
     <Typography variant="h5" className={classes.heading}>
     Category
   </Typography>
-    {meals.map(meal => {
+    {meals && meals.map(meal => {
       const info = 'category'
       return (
         <Chip
@@ -111,7 +111,7 @@ export default function TemporaryDrawer() {
       <Typography variant="h5" className={classes.heading}>
       Area
     </Typography>
-      {meals.map(meal => {
+      {meals && meals.map(meal => {
         const info = 'area'
         return (
           <Chip
@@ -129,7 +129,7 @@ export default function TemporaryDrawer() {
       <Typography variant="h5" className={classes.heading}>
       Tags
     </Typography>
-      {meals.map(meal => {
+      {meals && meals.map(meal => {
         const info = 'tag';
         return (
           <Chip
@@ -152,7 +152,7 @@ export default function TemporaryDrawer() {
             <MenuIcon />
           </Button>
           <SearchInput />
-          <AddToLike />
+          <LikedMeals />
         </Toolbar>
       </AppBar>
       <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
@@ -160,7 +160,7 @@ export default function TemporaryDrawer() {
       </Drawer>
 
       <div>
-        <MealsList data={meals}/>
+        <MealsList data={meals} addToLike={addToLike}/>
       </div>
     </div>
   );
