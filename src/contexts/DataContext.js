@@ -16,6 +16,7 @@ class DataContextProvider extends Component {
       this.setState({
         meals: data.meals
       });
+      console.log(this.state.meals)
     } catch (err) {
       console.log(err);
     }

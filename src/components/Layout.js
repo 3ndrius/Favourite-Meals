@@ -9,7 +9,7 @@ import Button from "@material-ui/core/Button";
 import Chip from '@material-ui/core/Chip';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-
+import MealsList from './MealsList';
 import { DataContext } from '../contexts/DataContext';
 
 import AddToLike from './AddToLike';
@@ -158,6 +158,10 @@ export default function TemporaryDrawer() {
       <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
         {sideList("left")}
       </Drawer>
+
+      <div>
+        <MealsList data={meals}/>
+      </div>
     </div>
   );
 }
