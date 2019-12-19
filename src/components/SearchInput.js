@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useContext} from "react";
+import { DataContext } from '../contexts/DataContext';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
@@ -17,10 +18,10 @@ const useStyles = makeStyles(theme => ({
 
 export default function BasicTextFields() {
   const classes = useStyles();
-
+  const { value, handleChangeInput } = useContext(DataContext);
   return (
     <form className={classes.root} noValidate autoComplete="off">
-      <TextField id="outlined-basic" label="Search meal" variant="outlined" />
+      <TextField id="outlined-basic" label="Search meal" variant="outlined" value={value} onChange={handleChangeInput} />
     </form>
   );
 }

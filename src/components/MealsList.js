@@ -1,4 +1,4 @@
-// import { DataContext } from '../contexts/DataContext';
+
 import React, {useContext} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -46,8 +46,9 @@ export default function MealsList() {
                 <CardActionArea>
                   <CardMedia
                     className={classes.media}
-                    image={item.strMealThumb}
+                    image={`${item.strMealThumb}/preview`}
                     title={item.strMeal}
+                    
                   />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
