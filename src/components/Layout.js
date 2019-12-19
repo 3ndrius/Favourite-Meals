@@ -61,12 +61,10 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-const handleDelete = (data) => {
-    console.log(data);
-}
+
 export default function TemporaryDrawer() {
 
-  const { meals } = useContext(DataContext);
+  const { meals, handleDelete } = useContext(DataContext);
   const classes = useStyles();
   const [state, setState] = React.useState({
     left: false
@@ -96,11 +94,13 @@ export default function TemporaryDrawer() {
     Category
   </Typography>
     {meals.map(meal => {
+      const info = 'category'
       return (
         <Chip
           key={meal.idMeal} 
           label={meal.strCategory}
           className={classes.chip}
+          onDelete={() => handleDelete(meal.strCategory, info)}
         />
       );
     })}
@@ -112,12 +112,13 @@ export default function TemporaryDrawer() {
       Area
     </Typography>
       {meals.map(meal => {
-        
+        const info = 'area'
         return (
           <Chip
             key={meal.idMeal} 
             label={meal.strArea}
             className={classes.chip}
+            onDelete={() => handleDelete(meal.strArea, info)}
           />
         );
       })}
@@ -129,12 +130,13 @@ export default function TemporaryDrawer() {
       Tags
     </Typography>
       {meals.map(meal => {
+        const info = 'tag';
         return (
           <Chip
             key={meal.idMeal} 
             label={meal.strTags ? meal.strTags : 'No tags'}
             className={classes.chip}
-            onDelete={() => handleDelete(meal)}
+            onDelete={() => handleDelete(meal.strTags, info)}
           />
         );
       })}

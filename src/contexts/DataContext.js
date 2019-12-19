@@ -20,10 +20,31 @@ class DataContextProvider extends Component {
       console.log(err);
     }
   };
+  handleDelete = (data, info) => {
+    console.log(info)
+    if(info === 'tag') {
+      
+      this.setState({
+        meals: this.state.meals.filter(item => item.strTags !== data)
+      })
+    }
+    if(info === 'area') {
+      this.setState({
+        meals: this.state.meals.filter(item => item.strArea !== data)
+      })
+    }
+    if(info === 'category') {
+      this.setState({
+        meals: this.state.meals.filter(item => item.strCategory !== data)
+      })
+    }
+  }
+
+
 
   render() {
     return (
-      <DataContext.Provider value={{ ...this.state }}>
+      <DataContext.Provider value={{ ...this.state , handleDelete: this.handleDelete}}>
         {this.props.children}
       </DataContext.Provider>
     );
