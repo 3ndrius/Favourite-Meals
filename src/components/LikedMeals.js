@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import { DataContext } from '../contexts/DataContext';
+import { DataContext } from "../contexts/DataContext";
 import Box from "@material-ui/core/Box";
 
 import Card from "@material-ui/core/Card";
@@ -22,29 +22,30 @@ const useStyles = makeStyles(theme => ({
     background: "transparent",
     zIndex: 6
   },
-  card:{
-  
-  },
+  card: {},
   media: {
-    height:40,
-    width:40
+    height: 40,
+    width: 40
   },
-  set:{
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding:12,
-    alignItems: 'center'
+  set: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 12,
+    alignItems: "center"
+  },
+  alt: {
+    height: 200,
+    width: 200,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
   }
 }));
-
 export default function LikedMeals() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const { liked, showSingleMeal, singleMeal } = useContext(DataContext);
-  console.log(singleMeal)
-  console.log("Liked", liked)
+  const { liked, showSingleMeal } = useContext(DataContext);
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
   };
@@ -83,26 +84,33 @@ export default function LikedMeals() {
           horizontal: "center"
         }}
       >
-       <Box>
-          {liked.map((item, key)=> {
-            return(
-              <Card className={classes.card} key={key}>
-              <CardActionArea className={classes.set} onClick={() => showSingleMeal(item[0])}>
-                <CardMedia 
-                  className={classes.media}
-                  image={item[1]}
-                  title={item[0]}
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h6" component="h6">
-                    {item[0]}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-            )
-          })}
-       </Box>
+        <Box>
+          {liked.length ? (
+            liked.map((item, key) => {
+              return (
+                <Card className={classes.card} key={key}>
+                  <CardActionArea
+                    className={classes.set}
+                    onClick={() => showSingleMeal(item[0])}
+                  >
+                    <CardMedia
+                      className={classes.media}
+                      image={item[1]}
+                      title={item[0]}
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="h6" component="h6">
+                        {item[0]}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              );
+            })
+          ) : (
+            <Card className={classes.alt}> No meals found! </Card>
+          )}
+        </Box>
       </Popover>
     </div>
   );
