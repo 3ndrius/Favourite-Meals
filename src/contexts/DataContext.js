@@ -9,7 +9,8 @@ class DataContextProvider extends Component {
     meals: null,
     liked: JSON.parse(localStorage.getItem("Liked")) || [],
     value: "",
-    singleMeal: {}
+    singleMeal: {},
+    clicked: false,
   };
   componentDidMount = async () => {
     try {
@@ -45,13 +46,15 @@ class DataContextProvider extends Component {
   };
 
   addToLike = (title, img) => {
-    let saveMeal = [title, img];
-    let save = [...this.state.liked, saveMeal];
-    this.setState({ liked: save }, () =>
+    let check = this.state.liked.find(item => item[0] === title);
+    if(!check) {
+      let saveMeal = [title, img];
+      let save = [...this.state.liked, saveMeal];
+      this.setState({ liked: save }, () =>
       this.savedToLocalStorage(this.state.liked)
     );
+    }
   };
-
   handleChangeInput = async e => {
     console.log(e.target.value);
     this.setState({
@@ -70,24 +73,37 @@ class DataContextProvider extends Component {
   };
 
   showSingleMeal = async meal => {
+    try {
+      let response = await fetch(`${API_URL}search.php?s=${meal}`);
+      let data = await response.json();
+
+      let checkMeal = this.state.meals.find(item => item.strMeal === meal);
+      console.log(checkMeal);
+      if(checkMeal) {
+        this.setState({
+          singleMeal: data.meals[0],
+          clicked: !this.state.clicked
+        });
+      }
+      else{
+        this.setState({
+          singleMeal: data.meals[0],
+          clicked: !this.state.clicked,
+          meals: [...this.state.meals, data.meals[0]]
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
     let test = this.state.meals.map(item => {
       if (meal === item.strMeal) {
         return Object.assign(item, { more: !item.more });
       }
       return Object.assign(item, { changer: !item.changer });
     });
-    try {
-      let response = await fetch(`${API_URL}search.php?s=${meal}`);
-      let data = await response.json();
-
-      this.setState({
-        singleMeal: data.meals[0],
-        meals: test
-      });
-    } catch (err) {
-      console.log(err);
-    }
-    
+    this.setState({
+      meals: test
+    })
   };
 
   render() {

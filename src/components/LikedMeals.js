@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
 export default function LikedMeals() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const { liked, showSingleMeal } = useContext(DataContext);
+  const { liked, showSingleMeal, clicked } = useContext(DataContext);
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
   };
@@ -87,11 +87,13 @@ export default function LikedMeals() {
         <Box>
           {liked.length ? (
             liked.map((item, key) => {
+              const noClick = clicked ? 'none' : 'auto' 
               return (
                 <Card className={classes.card} key={key}>
                   <CardActionArea
                     className={classes.set}
                     onClick={() => showSingleMeal(item[0])}
+                    style={{pointerEvents: noClick}}
                   >
                     <CardMedia
                       className={classes.media}

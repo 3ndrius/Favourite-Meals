@@ -9,14 +9,15 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Collapse from "@material-ui/core/Collapse";
+
 import { DataContext } from "../contexts/DataContext";
 const useStyles = makeStyles({
   card: {
-    maxWidth: 345,
+    maxWidth: 355,
     width: 345,
     height: "auto",
     padding: 5,
-    margin: 5
+    margin: 5,
   },
   media: {
     height: 240
@@ -49,9 +50,7 @@ const useStyles = makeStyles({
 
 export default function MealsList() {
   const classes = useStyles();
-  const { meals, addToLike, showSingleMeal, singleMeal } = useContext( DataContext);
-  console.log('Fetch single meal by name: ', singleMeal)
-  console.log('Fetch all meal by name: ', meals)
+  const { meals, addToLike, showSingleMeal, singleMeal} = useContext( DataContext);
   return (
     <Grid
       container
@@ -97,7 +96,7 @@ export default function MealsList() {
                   color="primary"
                   onClick={() => addToLike(item.strMeal, item.strMealThumb)}
                 >
-                  Like
+                Like
                 </Button>
               </CardActions>
               <Collapse in={expanded} timeout="auto" unmountOnExit>
