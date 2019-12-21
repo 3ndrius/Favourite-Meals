@@ -23,7 +23,6 @@ class DataContextProvider extends Component {
     }
   };
   handleDelete = (data, info) => {
-    console.log(info);
     if (info === "tag") {
       this.setState({
         meals: this.state.meals.filter(item => item.strTags !== data)
@@ -88,6 +87,7 @@ class DataContextProvider extends Component {
     } catch (err) {
       console.log(err);
     }
+    
   };
 
   render() {

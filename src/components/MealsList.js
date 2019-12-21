@@ -49,9 +49,9 @@ const useStyles = makeStyles({
 
 export default function MealsList() {
   const classes = useStyles();
-  const { meals, addToLike, showSingleMeal, singleMeal } = useContext(
-    DataContext
-  );
+  const { meals, addToLike, showSingleMeal, singleMeal } = useContext( DataContext);
+  console.log('Fetch single meal by name: ', singleMeal)
+  console.log('Fetch all meal by name: ', meals)
   return (
     <Grid
       container
@@ -66,7 +66,7 @@ export default function MealsList() {
           const more = item.more ? "100%" : "345px";
           const changer = item.changer ? "0.5" : "1";
           const expanded = item.more ? true : false;
-
+          const noClick = item.changer ? 'none' : 'auto'
           return (
             <Card
               className={classes.card}
@@ -77,11 +77,13 @@ export default function MealsList() {
                 onClick={() => {
                   showSingleMeal(item.strMeal);
                 }}
+                style={{pointerEvents: noClick}}
               >
                 <CardMedia
                   className={classes.media}
                   image={`${item.strMealThumb}/preview`}
                   title={item.strMeal}
+                  
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="h2">
