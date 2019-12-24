@@ -58,14 +58,15 @@ class DataContextProvider extends Component {
   handleChangeInput = async e => {
     console.log(e.target.value);
     this.setState({
-      value: e.target.value
+      value: e.target.value,
     });
 
     try {
       let response = await fetch(`${API_URL}search.php?s=${this.state.value}`);
       let data = await response.json();
       this.setState({
-        meals: data.meals
+        meals: data.meals,
+        clicked: false
       });
     } catch (err) {
       console.log(err);

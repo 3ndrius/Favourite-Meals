@@ -64,7 +64,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function TemporaryDrawer() {
 
-  const { meals, handleDelete, addToLike } = useContext(DataContext);
+  const { meals, handleDelete, addToLike, clicked } = useContext(DataContext);
   const classes = useStyles();
   const [state, setState] = React.useState({
     left: false
@@ -95,11 +95,13 @@ export default function TemporaryDrawer() {
   </Typography>
     {meals && meals.map(meal => {
       const info = 'category'
+      const noClick = clicked ? 'none' : 'auto' 
       return (
         <Chip
           key={meal.idMeal} 
           label={meal.strCategory}
           className={classes.chip}
+          style={{pointerEvents: noClick}}
           onDelete={() => handleDelete(meal.strCategory, info)}
         />
       );
@@ -112,9 +114,11 @@ export default function TemporaryDrawer() {
       Area
     </Typography>
       {meals && meals.map(meal => {
+         const noClick = clicked ? 'none' : 'auto' 
         const info = 'area'
         return (
           <Chip
+          style={{pointerEvents: noClick}}
             key={meal.idMeal} 
             label={meal.strArea}
             className={classes.chip}
@@ -130,9 +134,11 @@ export default function TemporaryDrawer() {
       Tags
     </Typography>
       {meals && meals.map(meal => {
+         const noClick = clicked ? 'none' : 'auto' 
         const info = 'tag';
         return (
           <Chip
+          style={{pointerEvents: noClick}}
             key={meal.idMeal} 
             label={meal.strTags ? meal.strTags : 'No tags'}
             className={classes.chip}
