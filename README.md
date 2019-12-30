@@ -9,7 +9,7 @@ In the project directory, you can run:
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-##  [DEMO](https://edrone-task-meal-project.netlify.com/)
+##  [DEMO](https://task-meal-project.netlify.com/)
 
 Stack:
 - reactJS (Context API, Hooks)
