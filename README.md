@@ -1,6 +1,5 @@
 # REACT_MEAL_APP
-APP using external api to find meals and displayed it. User can filter and sort data by ingredient tags. Then save specific meal to favourites.
-
+APP using external API to find meals and display them. User can filter and sort data by ingredient tags. Then save the specific meal to your favorites.
 
 ## FUNCTIONALITY
 
