@@ -1,17 +1,38 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# REACT_MEAL_APP
+APP using external api to find meals and displayed it. User can filter and sort data by ingredient tags. Then save specific meal to favourites.
 
-## Available Scripts
 
-In the project directory, you can run:
-### `npm install`
-### `npm start`
+## FUNCTIONALITY
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- search meal
+- filter meal by tags
+- list tags 
+- save to favourites
+- display details about specific meal
+- ...
 
-##  [DEMO](https://task-meal-project.netlify.com/)
+## TECH STACK AND PACKAGE
 
-Stack:
-- reactJS (Context API, Hooks)
-- React Maaterail UI
-- Meal API from https://www.themealdb.com/
+- react-hooks 
+- fetch
+- react-material UI
+- sass
+- react-router 
+- async await
+- external API
+- localStorage
+- ...
+
+
+
+## How to use
+ ` npm clone https://github.com/3ndrius/meal-app.git`
+ `npm i`
+ `npm start`
+ 
+
+### In Development Mode
+
+The App should be App :
+
+visit client : http://localhost:3000
