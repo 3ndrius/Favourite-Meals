@@ -23,6 +23,7 @@ APP using external api to find meals and displayed it. User can filter and sort 
 - localStorage
 - ...
 
+![prev](https://raw.githubusercontent.com/3ndrius/meal-app/master/meal-app.png)
 
 
 ## How to use
