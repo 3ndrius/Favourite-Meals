@@ -10,6 +10,8 @@ APP using external API to find meals and display them. User can filter and sort 
 - display details about specific meal
 - ...
 
+## [demo](https://task-meal-project.netlify.app)
+
 ## TECH STACK AND PACKAGE
 
 - react-hooks 
